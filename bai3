@@ -1,0 +1,15 @@
+SELECT oID, oDate, oPrice 
+FROM Order;
+SELECT c.cID, c.cName, p.pName
+FROM Order o 
+INNER JOIN Customer c ON o.cID = c.cID
+INNER JOIN Product p ON o.pID = p.pID;
+SELECT c.cName
+FROM Customer c
+LEFT JOIN Order o ON c.cID = o.cID WHERE o.oID IS NULL;
+SELECT o.oID, o.oDate, SUM(odQTY * pPrice) AS totalPrice
+FROM Order o
+INNER JOIN OrderDetail od ON o.oID = od.oID
+INNER JOIN Product p ON od.pID = p.pID
+GROUP BY o.oID;
+
